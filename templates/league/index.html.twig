@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EPL Score Simulator{% endblock %}
+
+
+    {% block body %}  
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    {{ form_start(form, {'attr': {id:'new-game-form','class': 'form'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.teams, 'Select Teams', {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(form.teams, {'attr': {'class': 'form-control select2', 'multiple': 'multiple'}}) }}
+                        {% if form_errors(form.teams) %}
+                            <div style="display:block" class="invalid-feedback">
+                                {{ form_errors(form.teams) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">New Game</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Recent games</h2>
+                <table class="table table-striped recent-seasons">
+                    <thead>
+                        <tr>
+                            <th scope="col">Simulation ID</th>
+                            <th scope="col">Time of a simulation</th>
+                            <th scope="col">Finished Games</th>
+                            <th scope="col">All Games</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for season in history %}
+                         <tr>
+                             <td><a href="{{ path('simulate_week', {'id': season.id}) }}">{{ season.id }}</a></td>
+                             <td>{{ season.datetime|date('d-m-Y H:i') }}</td>
+                             <td>{{ season.finishedGames }}</td>
+                             <td>{{ season.countOfCames }}</td>
+                         </tr>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endblock %}
+

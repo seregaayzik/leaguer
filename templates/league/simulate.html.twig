@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}EPL Score Simulator{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            <a class="btn btn-info" href="{{ path('index_league')}}">Return</a>
+        </div>
+    </div>
+    <div data-update-url="{{ path('edit_game')}}" data-url="{{ path('get_week_data', {'id': seasonId}) }}" id="result-table">
+        
+    </div>
+{% endblock %}

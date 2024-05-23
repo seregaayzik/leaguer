@@ -1,0 +1,91 @@
+<div class="card col-md-12 mt-2">
+  <div class="card-body">
+    <h5 class="card-title">{{ weekNum + 1 }}th Week match results:</h5>
+    <div class="row">
+        <div class="col-md-5">
+            <table class="table table-striped score-table">
+                <thead>
+                    <tr><td colspan="7">League Table</td></tr>
+                    <tr>
+                        <th scope="col">Teams</th>
+                        <th scope="col">PTS</th>
+                        <th scope="col">P</th>
+                        <th scope="col">W</th>
+                        <th scope="col">D</th>
+                        <th scope="col">L</th>
+                        <th scope="col">GD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for statistic in weekResult.teamStat %}
+                        <tr>
+                            <td>{{ statistic.team.name }}</td>
+                            <td>{{ statistic.points }}</td>
+                            <td>{{ statistic.games }}</td>
+                            <td>{{ statistic.win }}</td>
+                            <td>{{ statistic.draw }}</td>
+                            <td>{{ statistic.loss }}</td>
+                            <td>{{ statistic.diff }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-striped match-result">
+                <thead>
+                    <tr>
+                        <td colspan="3">Match Results</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in weekResult.games %}
+                        <tr>
+                            <td>{{ game.phomeTeam.name }}</td>
+                            <td>
+                                <span class="score"><a href="#" data-game-id="{{ game.id }}" data-score-type="homeScore" class="edit-result">{{ game.homeScore }}</a> - <a href="#" data-game-id="{{ game.id }}" data-score-type="guestScore" class="edit-result">{{ game.guestscore }}</a></span>
+                            </td>
+                            <td>{{ game.guestTeam.name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+            <div class="col-md-3">
+            <table class="table table-striped prediction">
+                <thead>
+                    <tr>
+                        <td colspan="2">Predictions:</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if weekNum > 3 %}
+                        {% for stat in weekResult.teamStat %}
+                            <tr>
+                                <td>{{ stat.team.name }}</td>
+                                <td>%{{ stat.prediction }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                            <tr>
+                                <td colspan="2">Not available till 5th week.</td>
+                            </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% if nav %}
+                <p class="mt-2">
+                    {% for navItem in nav %}
+                        <a class="btn btn-primary page-control" href="{{ navItem.url }}">{{ navItem.label }}</a>
+                    {% endfor %}
+                    <a class="btn btn-primary page-control refresh-game" href="{{ path('get_week_data', {'id': seasonId,'week':weekNum, 'refresh': true}) }}">Play this week again</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+  </div>
+</div>

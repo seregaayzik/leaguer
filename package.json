@@ -1,0 +1,31 @@
+{
+  "name": "insider.loc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seregaayzik/leaguer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seregaayzik/leaguer/issues"
+  },
+  "homepage": "https://github.com/seregaayzik/leaguer#readme",
+  "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@symfony/webpack-encore": "^4.6.1",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1",
+    "select2": "github:select2/select2",
+    "webpack-notifier": "^1.15.0"
+  }
+}

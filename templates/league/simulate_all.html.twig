@@ -1,0 +1,16 @@
+{% for weekResult in weekResults %}
+    {% set data = {
+        nav: [],
+        weekNum : loop.index0 + 1,
+        seasonId: seasonId
+    } %}
+
+    {% include 'league/_score.html.twig' with data %}
+{% endfor %}
+<div class="row">
+    <div class="col-md-12">
+        <p class="mt-2">
+            <a class="btn btn-primary page-control refresh-game" href="{{ path('simulate_season', {'id': seasonId, 'refresh': true}) }}">Play All Again</a>
+        </p>
+    </div>
+</div>
